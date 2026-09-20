@@ -1,8 +1,8 @@
 🥬 API Quitanda
 
-API REST para gerenciamento de produtos de uma quitanda.
+API REST desenvolvida para gerenciamento de produtos de uma quitanda.
 
-A aplicação permite cadastrar, consultar, atualizar e excluir produtos, utilizando Node.js, Express e SQLite como banco de dados.
+O projeto permite realizar o cadastro, consulta, atualização e exclusão de produtos, utilizando Node.js, Express e SQLite.
 
 🚀 Tecnologias
 
@@ -17,6 +17,19 @@ SQLite3
 CORS
 
 Nodemon
+
+📋 Pré-requisitos
+
+Antes de executar o projeto, certifique-se de ter instalado:
+
+Node.js
+
+npm
+
+Para verificar as versões instaladas:
+
+node --version
+npm --version
 
 📁 Estrutura do projeto
 api-quitanda/
@@ -40,26 +53,12 @@ api-quitanda/
 ├── package.json
 └── README.md
 
-📋 Pré-requisitos
-
-Antes de executar o projeto, é necessário ter instalado:
-
-Node.js
-
-npm, que normalmente é instalado junto com o Node.js
-
-Para verificar se o Node.js está instalado:
-
-node --version
-
-
-Para verificar o npm:
-
-npm --version
-
 ⚙️ Instalação
 
-Clone o projeto ou baixe os arquivos para sua máquina.
+Clone o repositório:
+
+git clone <URL_DO_REPOSITORIO>
+
 
 Entre na pasta do projeto:
 
@@ -70,20 +69,20 @@ Instale as dependências:
 
 npm install
 
-▶️ Executando a aplicação
+▶️ Executando o projeto
 Ambiente de desenvolvimento
 
-Para iniciar utilizando o Nodemon:
+Para iniciar a aplicação utilizando o Nodemon:
 
 npm run dev
 
 
-A API será iniciada em:
+O servidor será iniciado em:
 
 http://localhost:3000
 
 
-Você deverá visualizar no terminal:
+No terminal será exibido:
 
 Servidor rodando em http://localhost:3000
 
@@ -95,18 +94,18 @@ npm start
 
 🗄️ Banco de dados
 
-A aplicação utiliza SQLite.
+O projeto utiliza SQLite como banco de dados.
 
-O arquivo do banco de dados fica em:
+O arquivo do banco fica localizado em:
 
 database/quitanda.db
 
 
-Caso o arquivo ainda não exista, ele será criado automaticamente quando a aplicação for iniciada.
+O banco é criado automaticamente quando a aplicação é iniciada pela primeira vez.
 
-A tabela produtos é criada automaticamente pelo sistema.
+A tabela produtos também é criada automaticamente caso ainda não exista.
 
-Estrutura da tabela
+Estrutura da tabela produtos
 Campo	Tipo	Obrigatório	Descrição
 id	INTEGER	Sim	Identificador único
 nome	TEXT	Sim	Nome do produto
@@ -115,13 +114,16 @@ preco	REAL	Sim	Preço do produto
 estoque	INTEGER	Sim	Quantidade disponível
 unidade	TEXT	Sim	Unidade de venda
 validade	TEXT	Não	Data de validade
-🔌 Endpoints
+🔌 API
 
 A URL base da API é:
 
 http://localhost:3000
 
-Verificar API
+Health Check
+
+Verifica se a API está funcionando.
+
 GET /
 
 
@@ -131,6 +133,7 @@ Resposta:
   "mensagem": "API da Quitanda funcionando!"
 }
 
+📦 Produtos
 Listar produtos
 GET /produtos
 
@@ -176,7 +179,7 @@ Resposta:
 }
 
 
-Caso o produto não exista:
+Caso o produto não seja encontrado:
 
 {
   "erro": "Produto não encontrado"
@@ -221,7 +224,7 @@ Resposta:
 }
 
 
-Código HTTP esperado:
+Status HTTP:
 
 201 Created
 
@@ -269,7 +272,7 @@ Resposta:
 
 🧪 Testando a API
 
-Você pode utilizar ferramentas como:
+A API pode ser testada utilizando ferramentas como:
 
 Postman
 
@@ -281,61 +284,52 @@ REST Client
 
 cURL
 
-Exemplo utilizando cURL
-
-Cadastrar um produto:
-
+Exemplo com cURL
+Cadastrar produto
 curl -X POST http://localhost:3000/produtos \
 -H "Content-Type: application/json" \
--d "{\"nome\":\"Banana\",\"categoria\":\"Frutas\",\"preco\":5.99,\"estoque\":50,\"unidade\":\"kg\",\"validade\":\"2026-09-28\"}"
+-d '{"nome":"Banana","categoria":"Frutas","preco":5.99,"estoque":50,"unidade":"kg","validade":"2026-09-28"}'
 
-
-Listar produtos:
-
+Listar produtos
 curl http://localhost:3000/produtos
 
-
-Buscar produto:
-
+Buscar produto
 curl http://localhost:3000/produtos/1
 
+Atualizar produto
+curl -X PUT http://localhost:3000/produtos/1 \
+-H "Content-Type: application/json" \
+-d '{"nome":"Banana Prata","categoria":"Frutas","preco":6.99,"estoque":40,"unidade":"kg","validade":"2026-09-29"}'
 
-Excluir produto:
-
+Excluir produto
 curl -X DELETE http://localhost:3000/produtos/1
 
-📜 Scripts disponíveis
+📜 Scripts
 
-No package.json existem os seguintes comandos:
+Os seguintes scripts estão disponíveis no projeto:
 
-Iniciar normalmente
+Iniciar a aplicação
 npm start
 
-Iniciar em desenvolvimento
+Iniciar em modo desenvolvimento
 npm run dev
 
 
-O modo dev utiliza o Nodemon, permitindo que o servidor seja reiniciado automaticamente quando os arquivos do projeto forem alterados.
+O comando npm run dev utiliza o Nodemon, que reinicia automaticamente o servidor sempre que uma alteração é detectada nos arquivos do projeto.
 
 🔒 .gitignore
 
-O projeto possui um .gitignore para evitar o envio de arquivos desnecessários para o Git.
-
-Exemplo:
+Recomenda-se utilizar um .gitignore contendo:
 
 node_modules/
 .env
 
 
-Se o banco SQLite não deve ser versionado, também pode ser adicionado:
+Caso o banco de dados local não deva ser versionado no Git, adicione também:
 
 database/quitanda.db
 
-📌 Status do projeto
-
-Em desenvolvimento.
-
-Funcionalidades atuais
+📌 Funcionalidades
 
  Cadastro de produtos
 
@@ -355,11 +349,15 @@ Funcionalidades atuais
 
  CORS
 
-Próximas funcionalidades
+ Nodemon para desenvolvimento
+
+🔮 Próximas funcionalidades
 
  Cadastro de categorias
 
- Controle de entrada e saída de estoque
+ Controle de entrada de estoque
+
+ Controle de saída de estoque
 
  Cadastro de fornecedores
 
@@ -377,8 +375,12 @@ Próximas funcionalidades
 
  Testes automatizados
 
-👨‍💻 Desenvolvimento
+ Docker
 
-Projeto desenvolvido para gerenciamento de produtos de uma quitanda utilizando uma API REST.
+👨‍💻 Autor
 
-API Quitanda 🥬🍅🥕
+Desenvolvido para fins de estudo e gerenciamento de produtos de uma quitanda.
+
+📄 Licença
+
+Este projeto está disponível para fins educacionais.
